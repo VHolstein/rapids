@@ -50,13 +50,13 @@ PHONE_DATA_STREAMS:
   
   # AVAILABLE:
   aware_mysql: 
-    DATABASE_GROUP: MY_GROUP
+    DATABASE_GROUP: RHYTHMS
 
   aware_csv:
     FOLDER: tests/data/external/aware_csv
   
   aware_influxdb: 
-    DATABASE_GROUP: MY_GROUP
+    DATABASE_GROUP: RHYTHMS
 
 # Sensors ------
 
@@ -436,7 +436,7 @@ FITBIT_STEPS_SUMMARY:
   PROVIDERS:
     RAPIDS:
       COMPUTE: True
-      FEATURES: ["maxsumsteps", "minsumsteps", "avgsumsteps", "mediansumsteps", "stdsumsteps"]
+      FEATURES: ["maxsumsteps", "minsumsteps", "avgsumsteps", "mediansumsteps", "stdsumsteps", "maxvolatilitysteps", "minvolatilitysteps", "avgvolatilitysteps", "medianvolatilitysteps", "stdvolatilitysteps", "annualizedvolatilitysteps"]
       SRC_SCRIPT: src/features/fitbit_steps_summary/rapids/main.py
 
 # See https://www.rapids.science/latest/features/fitbit-steps-intraday/
