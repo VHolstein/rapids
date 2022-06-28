@@ -1,0 +1,73 @@
+########################################################################################################################
+#                                              GLOBAL CONFIGURATION                                                    #
+########################################################################################################################
+
+# See https://www.rapids.science/latest/setup/configuration/#participant-files
+PIDS: [test01]
+
+# See https://www.rapids.science/latest/setup/configuration/#automatic-creation-of-participant-files
+CREATE_PARTICIPANT_FILES:
+  CSV_FILE_PATH: "/spm-data/vault-data4/ReMAP/project_vincent/data/participant_files/test_participants.csv" # see docs for required format
+  PHONE_SECTION:
+    ADD: True
+    IGNORED_DEVICE_IDS: []
+  FITBIT_SECTION:
+    ADD: False
+    IGNORED_DEVICE_IDS: []
+  EMPATICA_SECTION:
+    ADD: False
+    IGNORED_DEVICE_IDS: []
+
+# See https://www.rapids.science/latest/setup/configuration/#time-segments
+TIME_SEGMENTS: &time_segments
+  TYPE: PERIODIC # FREQUENCY, PERIODIC, EVENT
+  FILE: "/spm-data/vault-data4/ReMAP/project_vincent/data/time_segments/timesegments_periodic.csv"
+  INCLUDE_PAST_PERIODIC_SEGMENTS: TRUE # Only relevant if TYPE=PERIODIC, see docs
+
+# See https://www.rapids.science/latest/setup/configuration/#timezone-of-your-study
+TIMEZONE: 
+    TYPE: SINGLE
+    SINGLE:
+      TZCODE: Europe/Berlin
+    MULTIPLE:
+      TZCODES_FILE: /spm-data/vault-data4/ReMAP/project_vincent/data/time_segments/multiple_timezones_example.csv
+      IF_MISSING_TZCODE: STOP
+      DEFAULT_TZCODE: Erope/Berlin
+      FITBIT: 
+        ALLOW_MULTIPLE_TZ_PER_DEVICE: False
+        INFER_FROM_SMARTPHONE_TZ: False
+        
+       
+########################################################################################################################
+#                                                 PHONE                                                                #
+########################################################################################################################
+
+# See https://www.rapids.science/latest/setup/configuration/#data-stream-configuration
+PHONE_DATA_STREAMS:
+  USE: remap_csv
+  
+  # AVAILABLE:
+  aware_mysql: 
+    DATABASE_GROUP: MY_GROUP
+
+  aware_csv:
+    FOLDER: /spm-data/vault-data4/ReMAP/project_vincent/data/
+  
+  remap_csv: 
+    DATABASE_GROUP: MY_GROUP
+
+# See https://www.rapids.science/latest/features/phone-locations/
+PHONE_LOCATIONS:
+  CONTAINER: locations
+  LOCATIONS_TO_USE: ALL_RESAMPLED # ALL, GPS, ALL_RESAMPLED, OR FUSED_RESAMPLED
+  FUSED_RESAMPLED_CONSECUTIVE_THRESHOLD: 30 # minutes, only replicate location samples to the next sensed bin if the phone did not stop collecting data for more than this threshold
+  FUSED_RESAMPLED_TIME_SINCE_VALID_LOCATION: 720 # minutes, only replicate location samples to consecutive sensed bins if they were logged within this threshold after a valid location row
+  ACCURACY_LIMIT: 100 # meters, drops location coordinates with an accuracy equal or higher than this. This number means there's a 68% probability the true location is within this radius
+  
+  PROVIDERS:
+    BARNETT:
+      COMPUTE: True
+      FEATURES: ["hometime","disttravelled","rog","maxdiam","maxhomedist","siglocsvisited","avgflightlen","stdflightlen","avgflightdur","stdflightdur","probpause","siglocentropy","circdnrtn","wkenddayrtn"]
+      IF_MULTIPLE_TIMEZONES: USE_MOST_COMMON
+      MINUTES_DATA_USED: False # Use this for quality control purposes, how many minutes of data (location coordinates gruped by minute) were used to compute features
+      SRC_SCRIPT: src/features/phone_locations/barnett/main.R
