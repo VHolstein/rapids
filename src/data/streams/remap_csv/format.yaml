@@ -3,12 +3,10 @@ PHONE_LOCATIONS:
     RAPIDS_COLUMN_MAPPINGS:
       TIMESTAMP: timestamp
       DEVICE_ID: device_id
-      DOUBLE_LATITUDE: double_latitude
-      DOUBLE_LONGITUDE: double_longitude
-      DOUBLE_BEARING: double_bearing
-      DOUBLE_SPEED: double_speed
-      DOUBLE_ALTITUDE: double_altitude
-      PROVIDER: provider
+      LATITUDE: latitude
+      LONGITUDE: longitude
+      SPEED: speed
+      ALTITUDE: altitude
       ACCURACY: accuracy
     MUTATION:
       COLUMN_MAPPINGS:
@@ -17,12 +15,10 @@ PHONE_LOCATIONS:
     RAPIDS_COLUMN_MAPPINGS:
       TIMESTAMP: timestamp
       DEVICE_ID: device_id
-      DOUBLE_LATITUDE: double_latitude
-      DOUBLE_LONGITUDE: double_longitude
-      DOUBLE_BEARING: double_bearing
-      DOUBLE_SPEED: double_speed
-      DOUBLE_ALTITUDE: double_altitude
-      PROVIDER: provider
+      LATITUDE: latitude
+      LONGITUDE: longitude
+      SPEED: speed
+      ALTITUDE: altitude
       ACCURACY: accuracy
     MUTATION:
       COLUMN_MAPPINGS:
