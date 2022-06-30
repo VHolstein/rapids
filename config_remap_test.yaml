@@ -7,7 +7,7 @@ PIDS: [test01]
 
 # See https://www.rapids.science/latest/setup/configuration/#automatic-creation-of-participant-files
 CREATE_PARTICIPANT_FILES:
-  CSV_FILE_PATH: "/spm-data/vault-data4/ReMAP/project_vincent/data/participant_files/test_participants.csv" # see docs for required format
+  CSV_FILE_PATH: "/spm-data/vault-data4/ReMAP/project_vincent/data/rapids_helper/rapids_helper.csv" # see docs for required format
   PHONE_SECTION:
     ADD: True
     IGNORED_DEVICE_IDS: []
@@ -20,8 +20,8 @@ CREATE_PARTICIPANT_FILES:
 
 # See https://www.rapids.science/latest/setup/configuration/#time-segments
 TIME_SEGMENTS: &time_segments
-  TYPE: PERIODIC # FREQUENCY, PERIODIC, EVENT
-  FILE: "/spm-data/vault-data4/ReMAP/project_vincent/data/time_segments/timesegments_periodic.csv"
+  TYPE: FREQUENCY # FREQUENCY, PERIODIC, EVENT
+  FILE: "/spm-data/vault-data4/ReMAP/project_vincent/data/rapids_helper/timesegments_frequency.csv"
   INCLUDE_PAST_PERIODIC_SEGMENTS: TRUE # Only relevant if TYPE=PERIODIC, see docs
 
 # See https://www.rapids.science/latest/setup/configuration/#timezone-of-your-study
@@ -32,7 +32,7 @@ TIMEZONE:
     MULTIPLE:
       TZCODES_FILE: /spm-data/vault-data4/ReMAP/project_vincent/data/time_segments/multiple_timezones_example.csv
       IF_MISSING_TZCODE: STOP
-      DEFAULT_TZCODE: Erope/Berlin
+      DEFAULT_TZCODE: Europe/Berlin
       FITBIT: 
         ALLOW_MULTIPLE_TZ_PER_DEVICE: False
         INFER_FROM_SMARTPHONE_TZ: False
